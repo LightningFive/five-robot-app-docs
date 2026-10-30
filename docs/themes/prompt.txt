@@ -1,0 +1,1 @@
+读取 https://raw.githubusercontent.com/LightningFive/five-robot-app-docs/main/docs/theme-ai.md ，按规范为五号机器人制作完整可安装的主题，交付240×240预览、主题包和源码；需求：【填写你的风格或设计要求】。GitHub读取失败时改读 https://gitee.com/yorium/five-robot-app-docs/raw/main/docs/theme-ai.md 。

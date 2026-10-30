@@ -1,0 +1,104 @@
+{
+  "schema": "x622-theme-context/v1",
+  "docs_revision": "theme-2026.10.30.1",
+  "theme_package_format": 1,
+  "recommended_engine_abi": 2,
+  "validated_engine_abis": [
+    1,
+    2,
+    3
+  ],
+  "native_scene_authoring_included": false,
+  "screen": [
+    240,
+    240
+  ],
+  "copy_prompt": "docs/themes/prompt.txt",
+  "mirrors": {
+    "github": "https://raw.githubusercontent.com/LightningFive/five-robot-app-docs/main/",
+    "gitee": "https://gitee.com/yorium/five-robot-app-docs/raw/main/"
+  },
+  "topics": {
+    "development": "docs/themes/development.md",
+    "format": "docs/themes/format.md",
+    "acceptance": "docs/themes/acceptance.md"
+  },
+  "files": {
+    "docs/theme-ai.md": {
+      "bytes": 5476,
+      "sha256": "0d220f6aade073edf09bd92410a7076a2f45d050cd023e1f57fab4cbd75546a7"
+    },
+    "docs/themes/acceptance.md": {
+      "bytes": 4043,
+      "sha256": "ceef03badf8a93ec0ed36e1880bc840247afd4a0173c2f006eae10c0e75f9e36"
+    },
+    "docs/themes/development.md": {
+      "bytes": 5451,
+      "sha256": "7b6b599b089cf85ae19bc124ae2aa4965d624720ae51a648951c2ee8a3e426ff"
+    },
+    "docs/themes/format.md": {
+      "bytes": 7727,
+      "sha256": "28b2908a17c3a43da1c5db64d53b63eb86eb50d7c807c0b6c111f972af994a98"
+    },
+    "docs/themes/prompt.txt": {
+      "bytes": 358,
+      "sha256": "99680108e20d64ced2bad7fc29403e5dbf5e985a9c4490060676f9aea6b911b1"
+    },
+    "docs/themes/provenance.json": {
+      "bytes": 908,
+      "sha256": "068249091156bf46be99ffa8d524753247bdde6fd33e4885f113609bbfb62437"
+    },
+    "docs/themes/theme_format.h": {
+      "bytes": 3383,
+      "sha256": "215c0f187ace9d94ec7f3f12c6a996679a457a5fe8eac625f1cf8afab807c556"
+    },
+    "docs/themes/theme_layout.h": {
+      "bytes": 6619,
+      "sha256": "a8a22f29968f757a015fc40da8faaf9307909510ebe2c5158a5a70cf9e426e36"
+    },
+    "tools/theme/context.py": {
+      "bytes": 1907,
+      "sha256": "313c1161e50576942d2b5bb8725a6e1bcd7755bdfefc2a158f10220a66e632ba"
+    },
+    "tools/theme/font.py": {
+      "bytes": 4406,
+      "sha256": "4f27e14de6e3fb08a61e0a21c79a8f11e97620ca318ae21e1a7cdb3a5f7069b3"
+    },
+    "tools/theme/layout_codec.py": {
+      "bytes": 2502,
+      "sha256": "c3a54163417147f150963e7eb0b908fb8ee191512000b3fd584596f38435369a"
+    },
+    "tools/theme/pack.py": {
+      "bytes": 8119,
+      "sha256": "73e85fda42c64b796f90b9a13384d15e2f085844ee6f7b79f48d6e801b808c20"
+    },
+    "tools/theme/theme_native_scene.py": {
+      "bytes": 5487,
+      "sha256": "a2c5c8406b396bb4d03a60153b131c8379a289144940e08488943dca51443cc3"
+    },
+    "tools/theme/theme_presentation.py": {
+      "bytes": 7899,
+      "sha256": "9217db659a65e7940679456ae255e5f352c99059ab9b6cdf4f4cd8041b259ae2"
+    },
+    "tools/theme/theme_tool.py": {
+      "bytes": 9675,
+      "sha256": "73aff093c2c055e6d602d98f6a22b73a9a33d8a019ef7d6254aaee1c0e0705d3"
+    },
+    "examples/theme-starter/layout.json": {
+      "bytes": 27758,
+      "sha256": "a86ed92113b0a59f87eadc41228343a50050461a1c6ae2272c654497d6614ded"
+    },
+    "examples/theme-starter/presentation.json": {
+      "bytes": 73,
+      "sha256": "476b567f339a664c7d7b248aa6b28c7040ba527c1efc6f669f7e10397ec574af"
+    },
+    "examples/theme-starter/README.md": {
+      "bytes": 788,
+      "sha256": "a1e7c63b2cc8af42735d3af778546ce5facbb96d2d3c42503a4b2a15a8781f43"
+    },
+    "examples/theme-starter/theme.json": {
+      "bytes": 356,
+      "sha256": "0f2d8fd725155df44a7ef31da37fffbb9ec1d55f1c4d3be84e653bfaec8d49e4"
+    }
+  }
+}

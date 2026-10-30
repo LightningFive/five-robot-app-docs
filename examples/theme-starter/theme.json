@@ -1,0 +1,12 @@
+{
+  "schema": "x622-theme-project/v1",
+  "id": "my-theme",
+  "name": "My Theme",
+  "version": "1.0.0",
+  "engine_abi": 2,
+  "appearances": 2,
+  "layout": "layout.json",
+  "presentation": "presentation.json",
+  "resources": [],
+  "notes": ["Incomplete authoring scaffold: add every required real image before building. Not a finished installable theme."]
+}

@@ -1,0 +1,20 @@
+{
+  "schema": "x622-theme-docs-provenance/v1",
+  "docs_revision": "theme-2026.10.30.1",
+  "source_commit": "3ce1562eab92abb9374916c67c4480d360321654",
+  "scope": "public data schemas/packaging validators only; no firmware, renderer, private artwork, font binaries, account or signing data",
+  "files": {
+    "tools\\theme\\theme_tool.py": {
+      "source": "tools/xapp/theme_tool.py",
+      "normalized_source_sha256": "73aff093c2c055e6d602d98f6a22b73a9a33d8a019ef7d6254aaee1c0e0705d3"
+    },
+    "tools\\theme\\theme_presentation.py": {
+      "source": "tools/xapp/theme_presentation.py",
+      "normalized_source_sha256": "9217db659a65e7940679456ae255e5f352c99059ab9b6cdf4f4cd8041b259ae2"
+    },
+    "tools\\theme\\theme_native_scene.py": {
+      "source": "tools/xapp/theme_native_scene.py",
+      "normalized_source_sha256": "a2c5c8406b396bb4d03a60153b131c8379a289144940e08488943dca51443cc3"
+    }
+  }
+}
