@@ -1,6 +1,6 @@
 {
   "api": "2.17",
-  "source_commit": "5ce368e2bd6878136f294b2521beba041f8d9635",
+  "source_commit": "ebb1e3a4b04707cd8859619d4037d4fd563823d3",
   "files": {
     "sdk/xapp/x622_ai_debug.h": "9563f8505871e4f097647bc395a0f23777458bbaadc8e0c0a9c9ad9e12e461b7",
     "sdk/xapp/x622_ambe.h": "ecb3efaff685e884b6f9464a4c187e463398bf03615a25d69a148d6cff915622",
@@ -31,8 +31,8 @@
     "tools/xapp/xapp_tool.py": "b4b5a5269e2fe1dd5b44b75369e1aa81ba33849ac1f6f30f8534bfdf3b858da7"
   },
   "scope": "All public XApp declarations plus public packaging/validation tools; no device or private host implementation",
-  "sdk_release": "2026.11.05.1-candidate",
-  "api_snapshot_release": "2026.11.05.1-candidate",
+  "sdk_release": "2026.11.05.2-candidate",
+  "api_snapshot_release": "2026.11.05.2-candidate",
   "public_tool_notes": "API2.17 integration candidate, not a frozen or published release. New WSS/headers/Opus contract; preserve API<=2.16. Native-only Opus requires matched firmware; actual device and desktop simulation are separate gates. The public checker retains its startup_ready signature check and export-report extension. Public CLI ASCII-safe JSON/path reporting is also retained for legacy Windows pipes.",
   "source_dirty": true,
   "release_status": "integration-candidate"
