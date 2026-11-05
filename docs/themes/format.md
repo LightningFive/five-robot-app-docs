@@ -100,3 +100,14 @@ python tools/theme/font.py --font work/my-theme/assets/allowed-font.ttf --charac
 ABI3 顶层严格只有 LYT1 与 NSC1 两条资源。NSC1 包含有界图片、RLE、字体、文本绑定和元数据；当前验证器要求 93..128 个场景、最多 512 素材，每场景最多 128 个节点/文本绑定，字形必须符合缓存边界。具体节点字段在公开 `theme_native_scene.py`，不能直接调用宿主 C++ 或给场景添加执行代码。
 
 本次提供 ABI3 **校验与封装**，没有把私有宿主、90 页的历史稿件、专用场景编译器或真实系统模拟器公开。缺少这些能力时选 ABI2，或明确停在 ABI3 设计候选；不能使用假场景、重复截图或修改校验器绕过绑定要求。
+
+## API 2.17 配套主题扩展（候选）
+
+主题文件仍是 XTHM 1，新增原生场景 ABI4/FNT3 和经典布局 ABI5/FNT3。
+ABI1/2/3 的布局和字体不变。详见 [索引字库](indexed-fonts.md)、
+[经典布局字库](classic-fonts.md)。ABI4/5 安装前必须检查设备 `theme-abi/5`
+（ABI4 至少 theme-abi/4），不能只看系统版本号。
+常用字库只需 Title 角色 `0x900`；不需为所有系统角色重复整库。
+`font.py --indexed` 按显式字符表构建有许可证的 FNT3，`pack.py` 支持 ABI5
+经典工程及 ABI4 预编译场景。字形按需读 Flash，缺字回退到 APP 自带字库。
+未提供通用 NSC1 场景设计编译器，不应把底层格式校验当作完整视觉编辑器。

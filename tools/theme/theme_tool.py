@@ -9,6 +9,7 @@ import struct
 import zlib
 from theme_presentation import verify_presentation, verify_font
 from theme_native_scene import verify_native_scene
+from theme_indexed_font import verify_indexed_font
 
 HEADER = struct.Struct("<4sHHIHHIHHIIII32s48s16s32s84sI")
 ENTRY = struct.Struct("<IHHHHIII2I")
@@ -78,7 +79,7 @@ def verify_theme_bytes(package: bytes) -> dict:
      index, count, layout_offset, layout_size, theme_id, name, release, digest,
      reserved, crc) = HEADER.unpack_from(package)
     if (magic, version, header_size, total, abi, entry_size, width, height, index) != (
-            b"XTHM", 1, 256, len(package), abi, 32, 240, 240, 256) or abi not in (1, 2, 3):
+            b"XTHM", 1, 256, len(package), abi, 32, 240, 240, 256) or abi not in (1, 2, 3, 4, 5):
         raise ValueError("unsupported theme header/engine ABI")
     if not 0 < appearances <= 3 or not 0 < count <= MAX_RESOURCES or any(reserved):
         raise ValueError("invalid theme appearance/count/reserved fields")
@@ -106,7 +107,7 @@ def verify_theme_bytes(package: bytes) -> dict:
         if (i == 0 and (key, kind, flags, offset, size) != (1, 4, 0, layout_offset, layout_size)) or (i and key == 1):
             raise ValueError("theme layout must be first indexed resource")
         pixels = w * h
-        if abi==3 and (count!=2 or (i==1 and (key,kind,flags,w,h)!=(3,7,0,0,0))):
+        if abi in (3, 4) and (count!=2 or (i==1 and (key,kind,flags,w,h)!=(3,7,0,0,0))):
             raise ValueError('ABI3 requires exactly LYT1 and NSC1')
         if kind in (1, 2, 3):
             if not pixels or size != pixels * {1: 1, 2: 3, 3: 2}[kind]:
@@ -114,19 +115,23 @@ def verify_theme_bytes(package: bytes) -> dict:
         elif kind == 4:
             if key != 1 or w or h or size != LAYOUT_BYTES:
                 raise ValueError('invalid theme layout resource')
-        elif kind == 5 and abi == 2:
+        elif kind == 5 and abi in (2, 5):
             if flags or w or h or not 0x900 <= key < 0x908:
                 raise ValueError('invalid theme font slot')
-            verify_font(package[offset:offset + size])
-        elif kind == 6 and abi == 2:
+            font_data = package[offset:offset + size]
+            if abi == 5 and font_data[:4] == b'FNT3': verify_indexed_font(font_data)
+            else: verify_font(font_data)
+        elif kind == 6 and abi in (2, 5):
             if key != 2 or flags or w or h:
                 raise ValueError('invalid theme presentation slot')
             styles = verify_presentation(package[offset:offset + size])
-        elif kind==7 and abi==3:
+        elif kind==7 and abi in (3, 4):
             verify_native_scene(package[offset:offset+size])
+            if (abi==4)!=(struct.unpack_from("<H",package,offset+4)[0]==3):
+                raise ValueError("theme ABI/native version mismatch")
         else:
             raise ValueError('unsupported theme resource format')
-        if abi == 2 and ((key == 2 and kind != 6) or (0x900 <= key < 0x908 and kind != 5)):
+        if abi in (2, 5) and ((key == 2 and kind != 6) or (0x900 <= key < 0x908 and kind != 5)):
             raise ValueError('reserved theme extension slot')
         for previous in records:
             if previous[0] == key and (not previous[2] or not flags or previous[2] & flags):
@@ -137,7 +142,7 @@ def verify_theme_bytes(package: bytes) -> dict:
         next_offset += size
     if next_offset != total:
         raise ValueError("theme package contains unindexed/trailing bytes")
-    if abi == 2 and styles is None:
+    if abi in (2, 5) and styles is None:
         raise ValueError('ABI2 requires STY2 presentation')
     for style in styles or []:
         fields, image, font = style[3], style[11], style[12]
@@ -149,7 +154,7 @@ def verify_theme_bytes(package: bytes) -> dict:
                         (not r[2] or r[2] & appearance) for r in records):
                     raise ValueError('missing STY2 image/font reference')
     for appearance in (1, 2):
-        if abi==3:break
+        if abi in (3, 4):break
         if not appearances & appearance:
             continue
         required = REQUIRED_IMAGES + ((0x505,) if appearance == 2 else ())

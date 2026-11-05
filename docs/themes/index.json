@@ -1,12 +1,14 @@
 {
   "schema": "x622-theme-context/v1",
-  "docs_revision": "theme-2026.10.30.1",
+  "docs_revision": "theme-2026.11.05.1-candidate",
   "theme_package_format": 1,
-  "recommended_engine_abi": 2,
+  "recommended_engine_abi": 5,
   "validated_engine_abis": [
     1,
     2,
-    3
+    3,
+    4,
+    5
   ],
   "native_scene_authoring_included": false,
   "screen": [
@@ -21,7 +23,9 @@
   "topics": {
     "development": "docs/themes/development.md",
     "format": "docs/themes/format.md",
-    "acceptance": "docs/themes/acceptance.md"
+    "acceptance": "docs/themes/acceptance.md",
+    "indexed-fonts": "docs/themes/indexed-fonts.md",
+    "classic-fonts": "docs/themes/classic-fonts.md"
   },
   "files": {
     "docs/theme-ai.md": {
@@ -33,12 +37,12 @@
       "sha256": "ceef03badf8a93ec0ed36e1880bc840247afd4a0173c2f006eae10c0e75f9e36"
     },
     "docs/themes/development.md": {
-      "bytes": 5451,
-      "sha256": "7b6b599b089cf85ae19bc124ae2aa4965d624720ae51a648951c2ee8a3e426ff"
+      "bytes": 6246,
+      "sha256": "a7f7efc35dd43fe38578fe655b11285b1d9cb57976c14e109135f17d5df55cff"
     },
     "docs/themes/format.md": {
-      "bytes": 7727,
-      "sha256": "28b2908a17c3a43da1c5db64d53b63eb86eb50d7c807c0b6c111f972af994a98"
+      "bytes": 8579,
+      "sha256": "6d6c36ab7d3c7e791083f40d4edfa3b0125a217d09ec223090173eed4014d39c"
     },
     "docs/themes/prompt.txt": {
       "bytes": 358,
@@ -61,28 +65,28 @@
       "sha256": "313c1161e50576942d2b5bb8725a6e1bcd7755bdfefc2a158f10220a66e632ba"
     },
     "tools/theme/font.py": {
-      "bytes": 4406,
-      "sha256": "4f27e14de6e3fb08a61e0a21c79a8f11e97620ca318ae21e1a7cdb3a5f7069b3"
+      "bytes": 4863,
+      "sha256": "4aaaa8cbc99d2bf042037bcf3f3918af6af3e42e4a4a12c0e7bf37f6a2e09fc0"
     },
     "tools/theme/layout_codec.py": {
       "bytes": 2502,
       "sha256": "c3a54163417147f150963e7eb0b908fb8ee191512000b3fd584596f38435369a"
     },
     "tools/theme/pack.py": {
-      "bytes": 8119,
-      "sha256": "73e85fda42c64b796f90b9a13384d15e2f085844ee6f7b79f48d6e801b808c20"
+      "bytes": 8318,
+      "sha256": "b26ff49e01ebecdb1dd129d0a26879dad1f3bec1df9e8e5ad9d3739c5f02c1e7"
     },
     "tools/theme/theme_native_scene.py": {
-      "bytes": 5487,
-      "sha256": "a2c5c8406b396bb4d03a60153b131c8379a289144940e08488943dca51443cc3"
+      "bytes": 8389,
+      "sha256": "4eadf24323beecbff2d8845f4cfb5567b754f2a07e95907d0ec60399488cfc09"
     },
     "tools/theme/theme_presentation.py": {
       "bytes": 7899,
       "sha256": "9217db659a65e7940679456ae255e5f352c99059ab9b6cdf4f4cd8041b259ae2"
     },
     "tools/theme/theme_tool.py": {
-      "bytes": 9675,
-      "sha256": "73aff093c2c055e6d602d98f6a22b73a9a33d8a019ef7d6254aaee1c0e0705d3"
+      "bytes": 10227,
+      "sha256": "025948304b1a3f3571010fbc56a054671056df46944caa0515b88844dd56c199"
     },
     "examples/theme-starter/layout.json": {
       "bytes": 27758,
@@ -99,6 +103,18 @@
     "examples/theme-starter/theme.json": {
       "bytes": 356,
       "sha256": "0f2d8fd725155df44a7ef31da37fffbb9ec1d55f1c4d3be84e653bfaec8d49e4"
+    },
+    "tools/theme/theme_indexed_font.py": {
+      "bytes": 4520,
+      "sha256": "00af0ebc314aec5f73d78ee15db69fdc93ab7b91537298cdcca0b925d03d167f"
+    },
+    "docs/themes/indexed-fonts.md": {
+      "bytes": 6213,
+      "sha256": "aed43c5265632ef0fa05fed7f3a7d8e762fa07b005ee236dbcaec8e1b9418b33"
+    },
+    "docs/themes/classic-fonts.md": {
+      "bytes": 2657,
+      "sha256": "ce34dc11e1fd3c930a642518774c5cdb62fbdd83421513180a292019a6254c75"
     }
   }
 }

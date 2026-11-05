@@ -83,23 +83,23 @@ def build(manifest: Path, output: Path) -> dict:
     if not isinstance(identity, str) or not re.fullmatch('[a-z0-9][a-z0-9_-]{0,30}', identity):
         raise ValueError('Theme ID must be 1..31 lowercase ASCII letters/digits/_/-')
     abi, appearances = integer(spec['engine_abi']), integer(spec['appearances'])
-    if abi not in (1, 2, 3) or appearances not in (1, 2, 3):
+    if abi not in (1, 2, 3, 4, 5) or appearances not in (1, 2, 3):
         raise ValueError('Unsupported engine ABI or appearance mask')
     name, version = field(spec['name'], 48), field(spec['version'], 16)
-    if not isinstance(spec.get('resources', []), list) or len(spec.get('resources', [])) > 256 - (2 if abi == 2 else 1):
+    if not isinstance(spec.get('resources', []), list) or len(spec.get('resources', [])) > 256 - (2 if abi in (2, 5) else 1):
         raise ValueError('Resource list exceeds package bound')
     layout_spec = json.loads(source(root, spec['layout']).read_text(encoding='utf-8'))
     layout = pack_layout(layout_spec)
     verify_layout(layout)
     records = [(1, 4, 0, 0, 0, layout)]
-    if abi == 3:
+    if abi in (3, 4):
         if spec.get('resources') or spec.get('presentation'):
-            raise ValueError('ABI3 contains only layout and an already compiled NSC1 scene')
+            raise ValueError('ABI3/4 contains only layout and an already compiled NSC1 scene')
         records.append((3, 7, 0, 0, 0, source(root, spec['native_scene']).read_bytes()))
     else:
         if 'native_scene' in spec or abi == 1 and 'presentation' in spec:
             raise ValueError('Extension not supported by selected ABI')
-        if abi == 2:
+        if abi in (2, 5):
             presentation = json.loads(source(root, spec['presentation']).read_text(encoding='utf-8'))
             records.append((2, 6, 0, 0, 0, compile_presentation(presentation)))
         for entry in spec.get('resources', []):
@@ -109,8 +109,8 @@ def build(manifest: Path, output: Path) -> dict:
             flags = integer(entry.get('flags', 0))
             path = source(root, entry['path'])
             if kind == 5:
-                if abi != 2 or not 0x900 <= key < 0x908 or flags:
-                    raise ValueError('FNT2 requires ABI2 role 0x900..0x907 and shared appearance')
+                if abi not in (2, 5) or not 0x900 <= key < 0x908 or flags:
+                    raise ValueError('Fonts require ABI2/5 role 0x900..0x907 and shared appearance')
                 data, w, h = path.read_bytes(), 0, 0
             else:
                 data, w, h = bitmap(path, kind, entry.get('width'), entry.get('height'))

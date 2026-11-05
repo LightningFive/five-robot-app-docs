@@ -1,0 +1,13 @@
+# Classic theme common-name font extension — ABI 5 candidate
+
+Development only; not a frozen or released interface. XAPP format 1 and its FNT2 font API remain unchanged. Normal 2.0.32 / API 2.17 candidate builds advertise `theme-abi/5`; older firmware must reject the new package before transfer.
+
+ABI 5 uses classic LYT1/image resources plus STY2 and optional FNT2/FNT3 role fonts. It does not interpret the package as an NSC1 native scene. An empty STY2 preserves classic geometry, status painting and animation; populated styles keep the explicit presentation behavior. ABI 1–4 keep their existing dispatch and validation rules.
+
+The application-name bank is role Title (`0x900`). Other common font banks are not required. The system applies this font to APP names, marketplace names, removal/install detail names and their scroll previews; an APP private font remains the fallback for missing characters. The Modulo conversion pins HarmonyOS Sans SC Medium and preserves all existing bitmaps, layout bytes and 346 built-in 18px glyphs exactly, adding GB2312 level-one characters to 4533 glyphs. It never overwrites the original theme.
+
+FNT3 reuses the ABI 4 wire limits: at most 24576 glyphs / 2 MiB per bank, sorted unique Unicode, contiguous encoded extents, at most 516 encoded / 512 decoded bytes per glyph. Glyphs are read on demand. The classic reader uses its existing bounded page cache and descriptor memo; it does not allocate an entire font. Decoder scratch is bounded to 1028 bytes on the caller stack. APP foreground handoff releases theme readers/caches through their existing owners. No audio, PCM, MP3 or WAMR policy changes.
+
+Full install validation checks outer SHA/CRC, each resource CRC, every font index/metric/codec and complete decompression. Python, browser and firmware reject the same semantically corrupt packages. Runtime bounds/read/decode failures poison the current theme session through the existing first-failure reporting path rather than silently showing missing pieces.
+
+Local evidence (2026-11-05): 23 packages accepted/rejected consistently by all three parsers; real LVGL comparison gives zero differing pixels on 10 original system pages, 346 identical original glyphs, 4187 additional glyphs and 50 clean APP-surface handoffs. Metadata 11168 bytes; glyph cache 2784 bytes in this fixture (not total UI heap). Both original and extended Modulo pass 3633 partial/full Wi-Fi checks; Purple R7 live-frame regression remains zero-diff. Marketplace regressions pass for built-in/legacy/extended/native themes. These are host results; device installation, acoustics and long-term acceptance remain separate gates.

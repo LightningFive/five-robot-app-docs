@@ -46,7 +46,7 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--font',type=Path,required=True);p.add_argument('--characters',type=Path,required=True)
     p.add_argument('--license',type=Path,required=True);p.add_argument('--size',type=int,required=True)
-    p.add_argument('--output',type=Path,required=True);a=p.parse_args()
+    p.add_argument('--output',type=Path,required=True);p.add_argument('--indexed',action='store_true',help='FNT3 common-name bank for theme ABI4/5');a=p.parse_args()
     sources={a.font.resolve(),a.characters.resolve(),a.license.resolve()}
     if a.output.resolve() in sources or a.output.with_suffix('.font.json').resolve() in sources:
         raise ValueError('Output would overwrite font source, character list or license')
@@ -61,9 +61,14 @@ def main():
         cmap=font.getBestCmap() or {}
         missing=sorted({ord(c) for c in chars if ord(c)>=32 and ord(c)!=127 and ord(c) not in cmap})
         if missing:raise ValueError('Source font is missing requested glyphs: '+','.join('U+%04X'%v for v in missing[:20]))
-    data=font_subset(a.font,a.size,chars)
+    if a.indexed:
+        from theme_indexed_font import extend_font
+        chars=''.join(sorted({c for c in chars if ord(c)>=32 and ord(c)!=127}))
+        seed=font_subset(a.font,a.size,chars[:1024])
+        data=extend_font(seed,a.font,a.size,chars)
+    else:data=font_subset(a.font,a.size,chars)
     a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_bytes(data)
-    proof={'format':'FNT2','font_name':a.font.name,'font_sha256':hashlib.sha256(a.font.read_bytes()).hexdigest(),
+    proof={'format':'FNT3' if a.indexed else 'FNT2','font_name':a.font.name,'font_sha256':hashlib.sha256(a.font.read_bytes()).hexdigest(),
            'characters_sha256':hashlib.sha256(a.characters.read_bytes()).hexdigest(),
            'license_name':a.license.name,'license_sha256':hashlib.sha256(a.license.read_bytes()).hexdigest(),
            'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest(),'hardware_tested':False}

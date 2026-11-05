@@ -15,6 +15,7 @@ from pack import build
 from theme_tool import REQUIRED_IMAGES, verify_theme_bytes
 from theme_presentation import FONT_HEADER, GLYPH
 from theme_native_scene import HEADER as NH, ASSET, SCENE, NODE
+from theme_indexed_font import MAGIC as FNT3_MAGIC, PACKED_GLYPH, encode, decode
 
 
 class ThemeTools(unittest.TestCase):
@@ -105,6 +106,30 @@ class ThemeTools(unittest.TestCase):
         self.assertIn(b'\x00\xf8\x80',package)
         spec['resources'][0]['format']='RGB565'
         with self.assertRaises(ValueError):self.pack(spec)
+
+    def test_classic_indexed_title_font_and_legacy_rejection(self):
+        font = FONT_HEADER.pack(FNT3_MAGIC,1,24,1,8,0,0,44,45)
+        font += PACKED_GLYPH.pack(65,44,6,1,1,0,0,1,0) + b'\xf0'
+        (self.root/'title.fnt3').write_bytes(font)
+        spec=copy.deepcopy(self.spec);spec['engine_abi']=5
+        spec['resources'].append({'id':0x900,'format':'Font','path':'title.fnt3'})
+        self.assertEqual(self.pack(spec)['engine_abi'],5)
+        valid=(self.root/'result.xtheme').read_bytes()
+        spec['engine_abi']=2
+        with self.assertRaises(ValueError):self.pack(spec)
+        self.assertEqual((self.root/'result.xtheme').read_bytes(),valid)
+        spec['engine_abi']=5
+        bad=bytearray(font);struct.pack_into('<H',bad,42,99)
+        (self.root/'title.fnt3').write_bytes(bad)
+        with self.assertRaises(ValueError):self.pack(spec)
+        self.assertEqual((self.root/'result.xtheme').read_bytes(),valid)
+
+    def test_independent_indexed_glyph_boundaries(self):
+        for size in (0,1,2,127,128,129,511,512):
+            for raw in (bytes(size),bytes(i%251 for i in range(size))):
+                codec,packed=encode(raw)
+                self.assertEqual(decode(packed,codec,size),raw)
+        with self.assertRaises(ValueError):decode(b'\xff',1,1)
 
 
 if __name__ == '__main__': unittest.main()
