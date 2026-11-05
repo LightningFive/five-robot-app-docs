@@ -9,9 +9,10 @@ CAPABILITIES = {
     'ui': ('7', ['x622_ui.h'], ('ui_',)),
     'gfx': ('7', ['x622_raster.h'], ('gfx_',)),
     'audio': ('9', ['x622_audio.h'], ('audio_', 'media_')),
-    'http': ('10', ['x622_http.h', 'x622_http_ex.h'], ('wifi_', 'http_')),
-    'net': ('10', ['x622_net.h'], ('udp_', 'ws_', 'wifi_')),
+    'http': ('10', ['x622_http.h', 'x622_http_ex.h', 'x622_http_headers.h'], ('wifi_', 'http_')),
+    'net': ('10', ['x622_net.h', 'x622_net_ex.h', 'x622_http_headers.h'], ('udp_', 'ws_', 'wifi_')),
     'ble': ('11', ['x622_ble.h', 'x622_ble_gatt.h', 'x622_ble_session.h', 'x622_ble_beacon.h'], ('ble_',)),
+    'opus': ('11', ['x622_opus.h', 'x622_audio_stream.h'], ('opus_', 'pcm_')),
     'stream': ('11', ['x622_audio_stream.h'], ('pcm_',)),
     'tracker': ('11', ['x622_tracker.h'], ('tracker_',)),
     'signal': ('11', ['x622_signal.h'], ('signal_',)),
@@ -90,6 +91,8 @@ def context(selected, template='native-ui'):
              '## Selected rules']
     for number in sorted({CAPABILITIES[name][0] for name in selected}, key=int):
         parts.append(section(number))
+    if set(selected) & {'opus','net','http'}:
+        parts.append('API 2.17 requires explicit wifi_start after APP-owned preparation; older APP startup remains unchanged. Opus is native, half duplex, asynchronous and bounded: BUSY does not consume input. Stop/release before direction change. The current desktop simulator does not prove codec or audio fidelity. Read docs/api-2.17.md for WSS headers and resource budgets.')
     parts.append('## Actual imports: declaration / minimum API / permission mask')
     parts.extend(f"- `{f['declaration']}` / {f['minimum_api']} / {f['permission_mask']}" for f in functions)
     parts.append('## Verbatim public header fragments')

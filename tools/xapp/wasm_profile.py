@@ -5,6 +5,11 @@ I32, I64 = 0x7F, 0x7E
 PERMISSIONS = 0x3F7F
 # (parameter types, result types, required permission bits)
 IMPORTS = {
+    "ws_open_ex": ("ii", "i", 96), "ws_status_ex": ("iii", "i", 96),
+    "http_request_headers": ("iiii", "i", 96),
+    "http_release": ("", "i", 96),
+    "opus_start": ("ii", "i", 1536), "opus_submit": ("iiii", "i", 1536),
+    "opus_read": ("iii", "i", 1536), "opus_status": ("iii", "i", 1536), "opus_stop": ("i", "i", 1536),
     "ambe_start": ("ii", "i", 1536), "ambe_submit": ("iiii", "i", 1536),
     "ambe_read": ("iii", "i", 1536), "ambe_status": ("iii", "i", 1536), "ambe_stop": ("i", "i", 1536),
     "ble_open": ("ii", "i", 256),

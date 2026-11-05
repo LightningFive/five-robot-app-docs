@@ -18,6 +18,8 @@
 #include "x622_ble_beacon.h"
 #include "x622_clock.h"
 #include "x622_net.h"
+#include "x622_net_ex.h"
+#include "x622_opus.h"
 #include "x622_ambe.h"
 #include "x622_crypto.h"
 #include "x622_gateway.h"
@@ -27,7 +29,7 @@ extern "C" {
 #endif
 
 #define X622_XAPP_API_MAJOR 2
-#define X622_XAPP_API_MINOR 16
+#define X622_XAPP_API_MINOR 17
 
 #define X622_OK 0
 #define X622_ERR_INVALID_ARGUMENT (-1)
@@ -110,6 +112,8 @@ X622_IMPORT("battery") int32_t x622_battery(int32_t* values, uint32_t bytes);
 // Private per-APP persistent storage. Keys are 1..15 ASCII bytes. Size/read/
 // read return a non-negative byte count; write/erase return X622_OK. Requires
 // X622_PERMISSION_STORAGE_PRIVATE.
+// Small settings: total <=8192 payload bytes and <=16 keys per APP. Space/quota
+// exhaustion returns QUOTA_EXCEEDED; use API 2.13 private files for larger data.
 X622_IMPORT("storage_size") int32_t x622_storage_size(const char* key, uint32_t key_bytes);
 X622_IMPORT("storage_read") int32_t x622_storage_read(
     const char* key, uint32_t key_bytes, void* output, uint32_t output_bytes);
@@ -381,6 +385,19 @@ X622_IMPORT("ambe_submit") int32_t x622_ambe_submit(int32_t handle,uint32_t sequ
 X622_IMPORT("ambe_read") int32_t x622_ambe_read(int32_t handle,x622_ambe_result_t*,uint32_t);
 X622_IMPORT("ambe_status") int32_t x622_ambe_status(int32_t handle,x622_ambe_status_t*,uint32_t);
 X622_IMPORT("ambe_stop") int32_t x622_ambe_stop(int32_t handle);
+// API 2.17: additive secure transport and half-duplex raw Opus codec.
+X622_IMPORT("ws_open_ex") int32_t x622_ws_open_ex(const x622_ws_config_ex_t*,uint32_t);
+X622_IMPORT("ws_status_ex") int32_t x622_ws_status_ex(int32_t,x622_ws_status_ex_t*,uint32_t);
+X622_IMPORT("http_request_headers") int32_t x622_http_request_headers(const x622_http_request_ex_t*,uint32_t,const x622_http_headers_t*,uint32_t);
+// Release only this APP's completed HTTP response and idle worker. Idempotent.
+// Returns BUSY while a request is in flight; does not cancel or wait for I/O.
+// Poll reports phase=0 afterwards. A later request lazily starts a new worker.
+X622_IMPORT("http_release") int32_t x622_http_release(void);
+X622_IMPORT("opus_start") int32_t x622_opus_start(const x622_opus_config_t*,uint32_t);
+X622_IMPORT("opus_submit") int32_t x622_opus_submit(int32_t,uint32_t,const void*,uint32_t);
+X622_IMPORT("opus_read") int32_t x622_opus_read(int32_t,void*,uint32_t);
+X622_IMPORT("opus_status") int32_t x622_opus_status(int32_t,x622_opus_status_t*,uint32_t);
+X622_IMPORT("opus_stop") int32_t x622_opus_stop(int32_t);
 
 // API 2.3: exclusive app-scoped BLE peripheral. Encrypted GATT (mode 1) or
 // standard HID report service (mode 2). Radios must be released for handoff.

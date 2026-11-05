@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "sdk_release": "2026.10.28.1",
-  "api_version": "2.16",
+  "sdk_release": "2026.11.05.1-candidate",
+  "api_version": "2.17",
   "package_format": 1,
   "import_module": "x622",
   "functions": [
@@ -903,6 +903,20 @@
       "declaration": "int32_t x622_http_poll_ex(void*,uint32_t);"
     },
     {
+      "name": "http_release",
+      "module": "x622",
+      "minimum_api": "2.17",
+      "wasm_parameters": [],
+      "wasm_results": [
+        "i32"
+      ],
+      "permission_mask": 96,
+      "experimental": false,
+      "permission_any_of": 0,
+      "header": "sdk/xapp/x622_xapp.h",
+      "declaration": "int32_t x622_http_release(void);"
+    },
+    {
       "name": "http_request",
       "module": "x622",
       "minimum_api": "2.3",
@@ -935,6 +949,25 @@
       "permission_any_of": 0,
       "header": "sdk/xapp/x622_xapp.h",
       "declaration": "int32_t x622_http_request_ex(const x622_http_request_ex_t*,uint32_t);"
+    },
+    {
+      "name": "http_request_headers",
+      "module": "x622",
+      "minimum_api": "2.17",
+      "wasm_parameters": [
+        "i32",
+        "i32",
+        "i32",
+        "i32"
+      ],
+      "wasm_results": [
+        "i32"
+      ],
+      "permission_mask": 96,
+      "experimental": false,
+      "permission_any_of": 0,
+      "header": "sdk/xapp/x622_xapp.h",
+      "declaration": "int32_t x622_http_request_headers(const x622_http_request_ex_t*,uint32_t,const x622_http_headers_t*,uint32_t);"
     },
     {
       "name": "input_state",
@@ -1075,6 +1108,94 @@
       "permission_any_of": 0,
       "header": "sdk/xapp/x622_xapp.h",
       "declaration": "uint64_t x622_millis(void);"
+    },
+    {
+      "name": "opus_read",
+      "module": "x622",
+      "minimum_api": "2.17",
+      "wasm_parameters": [
+        "i32",
+        "i32",
+        "i32"
+      ],
+      "wasm_results": [
+        "i32"
+      ],
+      "permission_mask": 1536,
+      "experimental": false,
+      "permission_any_of": 0,
+      "header": "sdk/xapp/x622_xapp.h",
+      "declaration": "int32_t x622_opus_read(int32_t,void*,uint32_t);"
+    },
+    {
+      "name": "opus_start",
+      "module": "x622",
+      "minimum_api": "2.17",
+      "wasm_parameters": [
+        "i32",
+        "i32"
+      ],
+      "wasm_results": [
+        "i32"
+      ],
+      "permission_mask": 1536,
+      "experimental": false,
+      "permission_any_of": 0,
+      "header": "sdk/xapp/x622_xapp.h",
+      "declaration": "int32_t x622_opus_start(const x622_opus_config_t*,uint32_t);"
+    },
+    {
+      "name": "opus_status",
+      "module": "x622",
+      "minimum_api": "2.17",
+      "wasm_parameters": [
+        "i32",
+        "i32",
+        "i32"
+      ],
+      "wasm_results": [
+        "i32"
+      ],
+      "permission_mask": 1536,
+      "experimental": false,
+      "permission_any_of": 0,
+      "header": "sdk/xapp/x622_xapp.h",
+      "declaration": "int32_t x622_opus_status(int32_t,x622_opus_status_t*,uint32_t);"
+    },
+    {
+      "name": "opus_stop",
+      "module": "x622",
+      "minimum_api": "2.17",
+      "wasm_parameters": [
+        "i32"
+      ],
+      "wasm_results": [
+        "i32"
+      ],
+      "permission_mask": 1536,
+      "experimental": false,
+      "permission_any_of": 0,
+      "header": "sdk/xapp/x622_xapp.h",
+      "declaration": "int32_t x622_opus_stop(int32_t);"
+    },
+    {
+      "name": "opus_submit",
+      "module": "x622",
+      "minimum_api": "2.17",
+      "wasm_parameters": [
+        "i32",
+        "i32",
+        "i32",
+        "i32"
+      ],
+      "wasm_results": [
+        "i32"
+      ],
+      "permission_mask": 1536,
+      "experimental": false,
+      "permission_any_of": 0,
+      "header": "sdk/xapp/x622_xapp.h",
+      "declaration": "int32_t x622_opus_submit(int32_t,uint32_t,const void*,uint32_t);"
     },
     {
       "name": "pcm_capture_start",
@@ -1887,6 +2008,23 @@
       "declaration": "int32_t x622_ws_open(const x622_ws_config_t*,uint32_t);"
     },
     {
+      "name": "ws_open_ex",
+      "module": "x622",
+      "minimum_api": "2.17",
+      "wasm_parameters": [
+        "i32",
+        "i32"
+      ],
+      "wasm_results": [
+        "i32"
+      ],
+      "permission_mask": 96,
+      "experimental": false,
+      "permission_any_of": 0,
+      "header": "sdk/xapp/x622_xapp.h",
+      "declaration": "int32_t x622_ws_open_ex(const x622_ws_config_ex_t*,uint32_t);"
+    },
+    {
       "name": "ws_read",
       "module": "x622",
       "minimum_api": "2.16",
@@ -1941,6 +2079,24 @@
       "permission_any_of": 0,
       "header": "sdk/xapp/x622_xapp.h",
       "declaration": "int32_t x622_ws_status(int32_t handle,x622_net_status_t*,uint32_t);"
+    },
+    {
+      "name": "ws_status_ex",
+      "module": "x622",
+      "minimum_api": "2.17",
+      "wasm_parameters": [
+        "i32",
+        "i32",
+        "i32"
+      ],
+      "wasm_results": [
+        "i32"
+      ],
+      "permission_mask": 96,
+      "experimental": false,
+      "permission_any_of": 0,
+      "header": "sdk/xapp/x622_xapp.h",
+      "declaration": "int32_t x622_ws_status_ex(int32_t,x622_ws_status_ex_t*,uint32_t);"
     }
   ],
   "lifecycle": {

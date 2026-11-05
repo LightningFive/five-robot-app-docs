@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sdk_release": "2026.10.30.1",
-  "git_tag": "sdk-2026.10.30.1",
-  "api_version": "2.16",
-  "release_status": "release-ready",
+  "sdk_release": "2026.11.05.1-candidate",
+  "git_tag": "sdk-2026.11.05.1-candidate",
+  "api_version": "2.17",
+  "release_status": "integration-candidate",
   "package_format": 1,
   "repositories": {
-    "github": "https://github.com/Yoriuml/five-robot-app-docs",
+    "github": "https://github.com/LightningFive/five-robot-app-docs",
     "gitee": "https://gitee.com/yorium/five-robot-app-docs"
   },
   "developer_index": "https://site.flashbot5.com/developer/v1/index.json",

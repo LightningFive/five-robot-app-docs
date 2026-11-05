@@ -1,5 +1,7 @@
 # 五号机器人 XApp SDK
 
+本分支是 **SDK 2026.11.05.1-candidate / API 2.17 集成候选**，尚未冻结或上线。稳定发行及公开可用性继续以官方索引为准。新增接口与证据见[API 2.17 候选合同](docs/api-2.17.md)。下面的 2.16 内容保留为兼容基线。
+
 制作设备主题：先读[主题 AI 制作入口](docs/theme-ai.md)。把入口中的一句话加上风格需求发给 AI，按公开数据合同制作原生 240×240 预览、`.xtheme`、源码和验证记录。主题资料修订 `theme-2026.10.30.1` 独立于下列 XApp SDK 发行；不需要访问私有固件、安装 ESP-IDF 或修改 XApp API。[可复制纯文本](docs/themes/prompt.txt) · [机器索引](docs/themes/index.json)。
 
 开发独立 ESP-IDF 原生固件：先读[原生固件 AI 入口](docs/native-firmware-ai.md)，只需把需求连同文档链接发给 AI。入口按需导向接线、电源、屏幕、音频、网络、内存、构建、镜像恢复及故障自查共十个专题，附[机器目录](docs/native/index.json)与 `tools/native_context.py`；不必一次读完整资料库。目标是完整独立工程和 `.bin`，资料不是已验收的通用 BSP。以下为安装在官方系统内的 XApp SDK。

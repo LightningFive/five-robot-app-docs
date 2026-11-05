@@ -7,6 +7,7 @@ from xapp.wasm_profile import IMPORTS, EXPORTS, PERMISSIONS
 
 def minimum_minor(name):
     # These gates mirror tools/xapp/xapp_tool.py, not guessed capabilities.
+    if name.startswith('opus_') or name in ('ws_open_ex','ws_status_ex','http_request_headers','http_release'): return 17
     if name in ('ble_open','clock_utc') or name.startswith(('ble_beacon_','udp_','ws_','ambe_')): return 16
     if name.startswith('ui_'): return 15
     if name.startswith('file_') or name == 'pcm_volume': return 13

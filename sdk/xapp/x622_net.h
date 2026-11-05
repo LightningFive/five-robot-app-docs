@@ -3,6 +3,8 @@
 
 /* API 2.16 development IP clients. Requires WIFI_CONNECT | NETWORK_HTTP (96).
  * Obtain a Wi-Fi lease first. ESP-NOW datagram_* is a different service.
+ * Apps requiring API >=2.17 explicitly call wifi_start after their own
+ * preparation; older apps retain the host's legacy automatic startup.
  * Descriptors: version=1, size=sizeof; all strings terminate, reserved=0.
  * Every open returns a positive generation-tagged handle, or a negative error.
  * No socket handle or WASM pointer escapes. One shared worker is created only

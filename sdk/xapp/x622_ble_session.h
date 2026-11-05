@@ -19,6 +19,15 @@
  * unchanged wire layouts. No APP-side legacy compatibility layer is required.
  * This is a peripheral contract, not Beacon, scanning or Central support.
  */
+/* API 2.17 opt-in for ordinary station Wi-Fi + this BLE peripheral session.
+ * Requires BOTH WIFI_CONNECT and BLE_ADVERTISE permissions. No new wire fields.
+ * Legacy flags=0 and ble_start/ble_gatt_start/beacon remain exclusive.
+ * Either service may be started first and stopped independently. Failure to
+ * start the second service leaves the first alive. Private Wi-Fi, gateway and
+ * ESP-NOW cannot coexist. RF airtime is shared; no throughput guarantee.
+ * This flag is consumed by the host and is never passed to the BLE controller.
+ */
+#define X622_BLE_COEXIST_WIFI 0x00010000u
 #define X622_BLE_CONFIG_VERSION 1u
 #define X622_BLE_ROLE_STREAM 1u
 #define X622_BLE_ROLE_HID 2u
