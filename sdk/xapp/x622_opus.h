@@ -30,6 +30,9 @@ typedef struct {
 // (24 KiB worker, measured C3 stack peak17568 B, core about5.1KiB), or0 for
 // VOIP/decoding. One slot applies backpressure until Read.
 // V2 decoder worker12KiB (isolated C3 peak8076B); V1 remains20KiB.
+// Without PREPARE_CORE, V2 LOW_DELAY/decoder queue, stack and opaque state
+// share one 4KiB-rounded work block (one-slot 16kHz:36KiB). Stop returns the
+// complete block after worker join. No retained pool or hidden idle worker.
 // V2 Read accepts capacity >=32+1275 for encode or32+PCM bytes for decode.
 // PREPARE_CORE can be ORed into reserved: initialize the codec, then release
 // its bootstrap task/stack while keeping the codec state until Submit or Stop.
@@ -47,7 +50,7 @@ typedef struct {
     int32_t last_error, codec_error;
     uint32_t submitted, completed, failed, queued_jobs, queued_results;
     uint32_t last_job_us, max_job_us, worker_stack_min, owned_bytes;
-} x622_opus_status_t; // 64 bytes; owned_bytes excludes vendor codec allocations
+} x622_opus_status_t; // 64 bytes; owned_bytes includes V2 work block, excludes external vendor allocations
 // Start returns positive generation immediately; poll status until READY.
 // Stop accepts cancellation immediately. Subsequent Start may return BUSY until
 // the stopped worker is reaped. APP exit joins and wipes all queues/codec state.

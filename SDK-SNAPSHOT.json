@@ -1,6 +1,6 @@
 {
   "api": "2.17",
-  "source_commit": "87b3a58e91e178ae7fd99ba558fb881e5300021f",
+  "source_commit": "9eae217fb69c9ad499c599d3aae46461470013ce",
   "files": {
     "sdk/xapp/x622_ai_debug.h": "9563f8505871e4f097647bc395a0f23777458bbaadc8e0c0a9c9ad9e12e461b7",
     "sdk/xapp/x622_ambe.h": "ecb3efaff685e884b6f9464a4c187e463398bf03615a25d69a148d6cff915622",
@@ -19,7 +19,7 @@
     "sdk/xapp/x622_http_headers.h": "958b6d1931b4f61301d8d3c9041f0502c8510d114bb725c8cb59d783995f87aa",
     "sdk/xapp/x622_net.h": "2494b587c391b767e4382f274e23d939349d8c169915ac45d6f8032d0185bca4",
     "sdk/xapp/x622_net_ex.h": "657980a75e1ad1407f901353de7ea6f43a0a4cb848e08508cb709934f3d9fcfe",
-    "sdk/xapp/x622_opus.h": "d08dd676a5b86847df7dbece4037a46123ccef2009bf7442fbce8ee59f71ea12",
+    "sdk/xapp/x622_opus.h": "68bd84a82a686308119dbb0a82edaea20d19f8764d8613cc2ec8d93fe192e3c3",
     "sdk/xapp/x622_raster.h": "a1e98da9ac709b8ec8861c3674d8a369981157d4f4e83c48406665f836149d96",
     "sdk/xapp/x622_signal.h": "5d0c9ff319d282429ee5e9524e0fb40746d0b708ba986a194391cb2c6ce5bc0a",
     "sdk/xapp/x622_tracker.h": "67def04c1f905250003ad71805165d73c92555e01b288219274059c1ce7a0738",
@@ -35,8 +35,8 @@
     "tools/theme/theme_indexed_font.py": "00af0ebc314aec5f73d78ee15db69fdc93ab7b91537298cdcca0b925d03d167f"
   },
   "scope": "All public XApp declarations plus public packaging/validation tools; no device or private host implementation",
-  "sdk_release": "2026.11.05.3-candidate",
-  "api_snapshot_release": "2026.11.05.3-candidate",
+  "sdk_release": "2026.11.05.4-candidate",
+  "api_snapshot_release": "2026.11.05.4-candidate",
   "public_tool_notes": "API2.17 integration candidate, not a frozen or published release. New WSS/headers/Opus contract; preserve API<=2.16. Native-only Opus requires matched firmware; actual device and desktop simulation are separate gates. The public checker retains its startup_ready signature check and export-report extension. Public CLI ASCII-safe JSON/path reporting is also retained for legacy Windows pipes.",
   "source_dirty": true,
   "release_status": "integration-candidate"
