@@ -1,6 +1,6 @@
-# XApp API 查阅手册（2.1—2.16 开发版）
+# XApp API 查阅手册（2.1—2.17）
 
-当前工作区 API 2.16 处于验收后的发行准备，尚未冻结或发布；能力和目标固件配对见 [2.16 准备说明](api-2.16-readiness.md)。正式交付以所选发行与目标固件为准；新APP提供退出入口并声明至少minor=11。
+当前 SDK 使用 API 2.17。新增能力及配套固件见 [API 2.17 合同](api-2.17.md)。新 APP 提供退出入口，声明至少 minor=11，并按实际使用的能力提高最低版本。
 本手册解释参数和行为，不取代 [C 声明](../sdk/xapp/x622_xapp.h)。
 完整结构定义还包括 [BLE](../sdk/xapp/x622_ble.h) 与 [HTTP](../sdk/xapp/x622_http.h)。
 
@@ -24,6 +24,7 @@
 | 2.14 | [BLE HID 触摸屏 Feature Report](api-extensions.md)，主触点订阅即可就绪 |
 | 2.15 | [原生缓存场景、动画、局部合成与帧耗时统计](api-extensions.md)，旧图形 ABI 不变 |
 | 2.16 | 版本化BLE会话、独立普通Beacon、有界IP UDP/三路ws://客户端、只读UTC、原生8kHz PCM播放（采集仍16kHz）；AMBE为默认关闭的实验接口，APP HTTP服务未提供 |
+| 2.17 | 普通 STA Wi-Fi 与 BLE 外设共存、WSS、受限 HTTP/WS 请求头、显式 HTTP 释放和双向 Opus |
 
 实验AMBE见[x622_ambe.h](../sdk/xapp/x622_ambe.h)。`ambe_start/submit/read/status/stop`在显式实验固件中按需工作，
 普通固件返回NOT_SUPPORTED；需要1536音频权限。每次选编码或解码，8 kHz/160点，队列2帧，输入及结果均复制，

@@ -59,7 +59,7 @@ def context(selected, template='native-ui'):
                 between('// Required exports.')]
     if 'gfx' in selected:
         snippets.append(between('// XApp API v2 native scene renderer.', '#define X622_WIFI_OFF'))
-    if 'http' in selected or 'gateway' in selected:
+    if set(selected) & {'http', 'net', 'gateway'}:
         snippets.append(between('#define X622_WIFI_OFF', '#define X622_MEDIA_STOPPED'))
         snippets.append(between('X622_IMPORT("wifi_stop")', '// Record GATT:'))
     if 'audio' in selected:
@@ -93,6 +93,12 @@ def context(selected, template='native-ui'):
         parts.append(section(number))
     if set(selected) & {'opus','net','http'}:
         parts.append('API 2.17 requires explicit wifi_start after APP-owned preparation; older APP startup remains unchanged. Opus is native, half duplex, asynchronous and bounded: BUSY does not consume input. Stop/release before direction change. The current desktop simulator does not prove codec or audio fidelity. Read docs/api-2.17.md for WSS headers and resource budgets.')
+    if 'ble' in selected and set(selected) & {'http', 'net'}:
+        parts.append(
+            'For simultaneous station Wi-Fi and a BLE peripheral, set app.json api_minor to 17 '
+            'even when imports infer 2.16. Request WIFI_CONNECT and BLE_ADVERTISE. '
+            'Set X622_BLE_COEXIST_WIFI in the versioned ble_open config and call wifi_start explicitly. '
+            'Poll readiness and stop each service independently. See docs/wifi-ble-coexist.md.')
     parts.append('## Actual imports: declaration / minimum API / permission mask')
     parts.extend(f"- `{f['declaration']}` / {f['minimum_api']} / {f['permission_mask']}" for f in functions)
     parts.append('## Verbatim public header fragments')

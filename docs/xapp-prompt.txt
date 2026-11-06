@@ -1,0 +1,1 @@
+读取 https://raw.githubusercontent.com/LightningFive/five-robot-app-docs/sdk-2026.11.05.5/docs/ai-workflow.md，按该标签的 SDK 开发并交付五号机器人 XApp；GitHub 不通时改读 https://gitee.com/yorium/five-robot-app-docs/raw/sdk-2026.11.05.5/docs/ai-workflow.md。需要 Wi-Fi 和 BLE 共存时，按 docs/wifi-ble-coexist.md 使用 API 2.17，并提醒我先将设备更新到支持 API 2.17 的系统。请交付可安装的 .xapp、源码和验证结果。需求：【填写需求】。

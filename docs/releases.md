@@ -1,8 +1,8 @@
-> 当前工件修订：2026.10.30.1 / API 2.16。新增按需原生资料库与读取／校验工具；公开 API 快照沿用不可变的 2026.10.28.1，头文件与模板不变。新包单独冻结和验证，公开可用性以官方索引为准。
+> 当前工件修订为 2026.11.05.5 / API 2.17，Git 标签为 `sdk-2026.11.05.5`。本次 SDK 的 Git 镜像发布与官网索引、设备 OTA 分开。
 
 # SDK 发行和镜像规范
 
-本次 SDK 发行号：2026.10.30.1；API：2.16；XAPP 包格式：1。三个编号不能混用。旧 2026.10.20.3/API2.15与2026.10.19.2保留，原有ABI继续兼容。
+本次 SDK 发行号为 2026.11.05.5，API 为 2.17，XApp 包格式为 1。历史发行及旧 API 继续兼容。
 GitHub 与 Gitee 发布相同 commit/tag；发行 ZIP 由同一份冻结字节生成，历史标签和资源不可原地覆盖。
 
 ## 下载契约
@@ -33,7 +33,7 @@ GET /developer/releases/<sdk_release>/file?path=<public-relative-path>
 先运行 `python tools/test_sdk.py`，提交全部公开修改，再执行：
 
 ```sh
-python tools/release.py --output dist/releases/2026.10.30.1
+python tools/release.py --output dist/releases/2026.11.05.5
 ```
 
 工具仅打包已提交且通过公开目录白名单的文件，拒绝覆盖现有发行目录；同一源码树可重复得到相同 ZIP 字节。
